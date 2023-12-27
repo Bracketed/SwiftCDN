@@ -13,6 +13,7 @@ enum STATUSES {
 
 router.put('/upload', async (request: ExpressRequest, response: ExpressResponse) => {
 	if (!request.files) return response.status(404).json({});
+
 	const files = request.files.file;
 	const FileArrayState = Array.isArray(files);
 	const responses: Array<string> = [];

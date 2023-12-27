@@ -6,7 +6,7 @@ import undici, { Client } from 'undici';
 import dotenv from 'dotenv';
 import { initialize } from './service.js';
 import { Stopwatch } from '@sapphire/stopwatch';
-import express, { Express, Router } from 'express';
+import express, { Express } from 'express';
 import { passwordStrength } from 'check-password-strength';
 import auth from './utilities/auth.js';
 import chalk from 'chalk';
@@ -16,7 +16,6 @@ declare module '@sapphire/pieces' {
 		logger: iLogger;
 		stopwatch: Stopwatch;
 		server: Express;
-		router: Router;
 		client: Client;
 	}
 }
@@ -28,12 +27,14 @@ function getNPMVersion() {
 }
 
 process.on('SIGINT', () => {
+	container.logger.info();
 	container.logger.warn('Application has received a SIGINT exit flag from the host machine.');
 	container.logger.fatal('Exiting...');
 	process.exit(143);
 });
 
 process.on('SIGTERM', () => {
+	container.logger.info();
 	container.logger.warn('Application has received a SIGTERM exit flag from the host machine.');
 	container.logger.fatal('Exiting...');
 	process.exit(143);
@@ -151,7 +152,6 @@ if (couchdb_put) {
 container.logger.info();
 container.logger.info('Initialization complete, starting application...');
 container.server = express();
-container.router = Router();
 
 let UploadLimit: number;
 if (!process.env.UPLOAD_LIMIT) {

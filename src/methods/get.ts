@@ -1,56 +1,8 @@
 import auth from '../utilities/auth.js';
-import version from '../utilities/version.js';
 import { container } from '@sapphire/pieces';
 import express, { Request as ExpressRequest, Response as ExpressResponse } from 'express';
 
 const router = express.Router();
-
-router.get('/all', async (_request: ExpressRequest, response: ExpressResponse) => {
-	const couchdetails = await container.client
-		.request({
-			method: 'GET',
-			path: '/content/_all_docs',
-			headers: {
-				Authorization: auth(process.env.BACKEND_USERNAME, process.env.BACKEND_PASSWORD),
-			},
-		})
-		.then((d) => {
-			if (d.statusCode === 200) return d.body;
-			return false;
-		})
-		.catch(() => false);
-
-	if (typeof couchdetails === 'boolean') return response.status(404).json({});
-
-	const body = (await couchdetails.json()) as any;
-
-	return response.status(200).json(body.rows);
-});
-
-router.get('/', async (_request: ExpressRequest, response: ExpressResponse) => {
-	const couchdetails = await container.client
-		.request({
-			method: 'GET',
-			path: '/',
-			headers: {
-				Authorization: auth(process.env.BACKEND_USERNAME, process.env.BACKEND_PASSWORD),
-			},
-		})
-		.then((d) => {
-			if (d.statusCode === 200) return d.body;
-			return false;
-		})
-		.catch(() => false);
-
-	if (typeof couchdetails === 'boolean') return response.status(404).json({});
-
-	const body = (await couchdetails.json()) as any;
-
-	return response.status(200).json({
-		'SwiftCDN-Version': version,
-		'CouchDB-Version': body.version,
-	});
-});
 
 router.get('/:file/download', async (request: ExpressRequest, response: ExpressResponse) => {
 	if (!request.params['file']) return response.status(404);
@@ -100,6 +52,7 @@ router.get('/:file/info', async (request: ExpressRequest, response: ExpressRespo
 
 router.get('/:file', async (request: ExpressRequest, response: ExpressResponse) => {
 	if (!request.params['file']) return response.status(404);
+	if (request.params['file'].startsWith('favicon')) return response.status(404);
 
 	const webFile = await container.client
 		.request({
