@@ -39,7 +39,7 @@ jobs:
               with:
                   registry: ${{ env.REGISTRY }}
                   username: ${{ secrets.GHUB_USER }}
-                  password: ${{ secrets.GHUB_TOKEN }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
 
             - name: Build and push Docker image - Latest
               uses: docker/build-push-action@v5.1.0
