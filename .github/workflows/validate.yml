@@ -1,0 +1,17 @@
+name: Docker Build Test
+run-name: Docker Build Test
+
+on:
+    push:
+    schedule:
+        - cron: '0 0 * * 0'
+    workflow_dispatch:
+
+jobs:
+    check-code:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - run: docker build --tag ninjaninja140/ts-template .
+              name: Running test docker build

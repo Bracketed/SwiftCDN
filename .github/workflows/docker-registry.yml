@@ -1,0 +1,55 @@
+name: Upload CDN Fontend Image to docker.io
+run-name: Uploading ${{ github.actor }}'s changes. [Version ${{  github.ref_name }}] - "${{ github.event.head_commit.message }}"
+
+on:
+    workflow_dispatch:
+    push:
+        tags:
+            - 'v*'
+
+env:
+    ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+
+jobs:
+    push-docker:
+        runs-on: ubuntu-latest
+        name: Build & Push images to Bracketed registry
+        env:
+            REGISTRY: docker.io
+        outputs:
+            image_name: ${{ steps.setName.outputs.lowercase_image_name }}
+
+        steps:
+            - name: Set up Image Name
+              id: setName
+              run: |
+                  IMAGE_NAME=${{ github.repository }}
+                  echo "::set-output name=lowercase_image_name::$(echo $IMAGE_NAME | tr '[:upper:]' '[:lower:]')"
+                  echo "IMAGE_NAME=${IMAGE_NAME}"
+
+            - name: Checkout Repository
+              uses: actions/checkout@v4.1.1
+
+            - name: Set up Docker buildx
+              uses: docker/setup-buildx-action@v3.0.0
+              with:
+                  driver-opts: |
+                      image=moby/buildkit:v0.12.4
+
+            - name: Log into registry ${{ env.REGISTRY }}
+              uses: docker/login-action@v3.0.0
+              with:
+                  registry: ${{ env.REGISTRY }}
+                  username: ${{ secrets.DOCKER_USER }}
+                  password: ${{ secrets.DOCKER_TOKEN }}
+
+            - name: Build and push Docker image - ${{  github.ref_name }}
+              uses: docker/build-push-action@v5.1.0
+              with:
+                  tags: ${{ steps.setName.outputs.lowercase_image_name }}:${{ github.ref }}
+                  push: true
+            - name: Build and push Docker image - Development
+              uses: docker/build-push-action@v5.1.0
+              with:
+                  tags: ${{ steps.setName.outputs.lowercase_image_name }}:development
+                  push: true

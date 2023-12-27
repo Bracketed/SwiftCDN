@@ -1,0 +1,41 @@
+version: '3.8'
+name: cdn-app
+
+services:
+    frontend:
+        image: bracketed/swiftcdn:latest
+        container_name: cdn-frontend
+        restart: always
+        depends_on:
+            - backend
+        networks:
+            - cdn-network
+        ports:
+            - 3000:3000
+        environment:
+            EXPRESS_PORT: 3000
+            COUCHDB_PORT: 5984
+            UPLOAD_LIMIT: 1000 # In Megabytes
+            BACKEND_USERNAME: administator
+            BACKEND_PASSWORD: cdn
+
+    backend:
+        image: bitnami/couchdb:3.3.3
+        container_name: cdn-backend
+        restart: always
+        networks:
+            - cdn-network
+        ports:
+            - 5984:5984
+        volumes:
+            - cdn-storage:/bitnami/couchdb
+            - ./couchdb.config.ini:/opt/bitnami/couchdb/etc/local.d/10-custom.ini
+        environment:
+            COUCHDB_PORT_NUMBER: 5984
+            COUCHDB_USER: administator
+            COUCHDB_PASSWORD: cdn
+
+networks:
+    cdn-network:
+volumes:
+    cdn-storage:
