@@ -13,7 +13,7 @@ env:
 jobs:
     push-docker:
         runs-on: ubuntu-latest
-        name: Build & Push images to Bracketed registry
+        name: Build & Push images to Docker registry
         env:
             REGISTRY: docker.io
         outputs:
