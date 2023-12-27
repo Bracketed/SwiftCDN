@@ -46,7 +46,7 @@ jobs:
             - name: Build and push Docker image - ${{  github.ref_name }}
               uses: docker/build-push-action@v5.1.0
               with:
-                  tags: ${{ steps.setName.outputs.lowercase_image_name }}:${{ github.ref }}
+                  tags: ${{ steps.setName.outputs.lowercase_image_name }}:${{ github.ref_name }}
                   push: true
             - name: Build and push Docker image - Development
               uses: docker/build-push-action@v5.1.0
