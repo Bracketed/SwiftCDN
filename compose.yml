@@ -3,7 +3,7 @@ name: cdn-app
 
 services:
     frontend:
-        image: bracketed/swiftcdn:latest
+        image: bracketed/swiftcdn:development
         container_name: cdn-frontend
         restart: always
         depends_on:

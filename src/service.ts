@@ -29,10 +29,10 @@ function initialize(Application_Port: string, Upload_Limit: number) {
 	container.server.use(upload(ExpressUploadOptions));
 	container.server.use(cors(CorsOptions));
 
-	container.server.use('/', all);
-	container.server.use('/', get);
-	container.server.use('/', post);
-	container.server.use('/', put);
+	container.server.use('/', all, (d) => container.logger.debug(String(d)));
+	container.server.use('/', get, (d) => container.logger.debug(String(d)));
+	container.server.use('/', post, (d) => container.logger.debug(String(d)));
+	container.server.use('/', put, (d) => container.logger.debug(String(d)));
 
 	container.server.listen(Application_Port, () => {
 		container.logger.info(`Express Server: Now listening on port: ${Application_Port}`);
