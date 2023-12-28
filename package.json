@@ -1,7 +1,7 @@
 {
 	"name": "@bracketed/swiftcdn",
 	"packageManager": "yarn@4.0.2",
-	"version": "3.0.0",
+	"version": "3.1.0",
 	"repository": "https://github.com/ninjaninja140/templates-node-typescript",
 	"author": {
 		"name": "ninjaninja140",
