@@ -209,55 +209,24 @@ function initialize(Application_Port: string, Upload_Limit: number) {
 		const file = Buffer.from(body.buffer, body.encoding);
 
 		switch (body.type) {
-			case 'application': {
-				response.setHeader('Content-Disposition', `attachment; filename="${body.name}"`);
-				return response.status(200).send(file);
-			}
 			case 'audio': {
-				const audio = `<video controls="" autoplay="" style="height: 40px; width: 66%;"> <source src="data:${
-					body.name
-				};base64,${file.toString('base64')}" type="${
-					body.mime
-				}"> Your browser does not support the video tag. </video>`;
-				const attachmentDetails = `<meta property="twitter:card" content="summary"><meta property="twitter:title" content="Audio File - ${body.name}"><meta property="og:title" content="Audio File - ${body.name}"><meta property="og:description" content="Audio File - ${body.name}">`;
-				const css =
-					':root { background-color: black; height: 100%; -moz-user-focus: ignore; } video { position: absolute; inset: 0; margin: auto; max-width: 100%; max-height: 100%; user-select: none; -moz-user-focus: normal; } video:focus { outline-style: none; } ';
-
-				const html = `<html><head><meta name="robots" content="noindex">${attachmentDetails}<meta name="viewport" content="width=device-width; height=device-height;"><style>${css}</style><title>${body.name}</title></head><body>${audio}</body></html>`;
-
-				return response.status(200).send(html);
+				response.set('Content-Type', body.mime);
+				return response.status(200).end(file);
 			}
 			case 'video': {
-				const video = `<video controls="" autoplay=""> <source src="data:${body.name};base64,${file.toString(
-					'base64'
-				)}" type="${body.mime}"> Your browser does not support the video tag. </video>`;
-				const attachmentDetails = `<meta property="twitter:card" content="summary"><meta property="twitter:player" content="${request.protocol}://${request.headers.host}/${request.params['file']}"><meta property="og:type" content="video.other"><meta property="og:video" content="${request.protocol}://${request.headers.host}/${request.params['file']}"><meta property="og:description" content="Video File - ${body.name}">`;
-				const css =
-					':root { background-color: black; height: 100%; -moz-user-focus: ignore; } video { position: absolute; inset: 0; margin: auto; max-width: 100%; max-height: 100%; user-select: none; -moz-user-focus: normal; } video:focus { outline-style: none; } ';
-
-				const html = `<html><head>${attachmentDetails}<meta name="robots" content="noindex"><meta name="viewport" content="width=device-width; height=device-height;"><style>${css}</style><title>${body.name}</title></head><body>${video}</body></html>`;
-
-				return response.status(200).send(html);
+				response.set('Content-Type', body.mime);
+				return response.status(200).end(file);
 			}
 			case 'text': {
 				const text = file.toString('utf-8');
-				const textcss =
-					'pre { white-space: pre-wrap; word-wrap: break-word; -moz-control-character-visibility: visible; } .nowrap pre { white-space: pre; } html:not([dir]) pre { unicode-bidi: plaintext; } @-moz-document unobservable-document() { :root { color-scheme: light dark; } } @media (width: 0) or (height: 0) { :root { display: none; } }';
 				const attachmentDetails = `<meta property="twitter:card" content="summary"><meta property="twitter:title" content="Text File - ${body.name}"><meta property="og:title" content="Text File - ${body.name}"><meta property="og:description" content="Text File - ${body.name}">`;
-				const html = `<html><head>${attachmentDetails}<meta name="robots" content="noindex"><style>${textcss}</style><title>${body.name}</title></head><body><pre>${text}</pre></body></html>`;
+				const html = `<html><head>${attachmentDetails}<meta name="robots" content="noindex"><title>${body.name}</title></head><body><pre>${text}</pre></body></html>`;
 
 				return response.status(200).send(html);
 			}
 			case 'image': {
-				const img = `<img src="data:${body.mime};base64,${file.toString('base64')}" alt="${
-					body.name
-				}" class="transparent">`;
-				const attachmentDetails = `<meta property="twitter:card" content="summary_large_image"><meta property="twitter:image" content="${request.protocol}://${request.headers.host}/${request.params['file']}"><meta property="og:image" content="${request.protocol}://${request.headers.host}/${request.params['file']}"><meta property="og:description" content="Image File - ${body.name}">`;
-				const css =
-					'body { margin: 0; } @media not print { .fullZoomOut { cursor: zoom-out; } .fullZoomIn { cursor: zoom-in; } .shrinkToFit { cursor: zoom-in; } .overflowingVertical, .overflowingHorizontalOnly { cursor: zoom-out; } } .isInObjectOrEmbed { width: 100%; height: 100vh; } img { display: block; } ';
-				const html = `<html><head><meta name="robots" content="noindex">${attachmentDetails}<meta name="viewport" content="width=device-width; height=device-height;"><style>${css}</style><title>${body.name}</title></head><body>${img}</body></html>`;
-
-				return response.status(200).send(html);
+				response.set('Content-Type', body.mime);
+				return response.status(200).end(file);
 			}
 			default: {
 				response.setHeader('Content-Disposition', `attachment; filename="${body.name}"`);
