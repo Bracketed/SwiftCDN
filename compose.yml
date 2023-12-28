@@ -29,7 +29,7 @@ services:
             - 5984:5984
         volumes:
             - cdn-storage:/bitnami/couchdb
-            - ./couchdb.config.ini:/opt/bitnami/couchdb/etc/local.d/10-custom.ini
+            #- ./couchdb.config.ini:/opt/bitnami/couchdb/etc/local.d/10-custom.ini
         environment:
             COUCHDB_PORT_NUMBER: 5984
             COUCHDB_USER: administator

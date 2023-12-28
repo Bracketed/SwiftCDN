@@ -10,12 +10,12 @@ __metadata:
   resolution: "@bracketed/swiftcdn@workspace:."
   dependencies:
     "@bracketed/typescript-config": "npm:^4.4.0"
-    "@sapphire/pieces": "npm:^4.1.0"
+    "@sapphire/pieces": "npm:^4.2.0"
     "@sapphire/stopwatch": "npm:^1.5.1"
-    "@types/compression": "npm:^1"
-    "@types/cors": "npm:^2"
-    "@types/express": "npm:^4"
-    "@types/express-fileupload": "npm:^1"
+    "@types/compression": "npm:^1.7.5"
+    "@types/cors": "npm:^2.8.17"
+    "@types/express": "npm:^4.17.21"
+    "@types/express-fileupload": "npm:^1.4.4"
     "@types/node": "npm:^20.10.5"
     chalk: "npm:^5.3.0"
     check-password-strength: "npm:^2.0.7"
@@ -27,7 +27,7 @@ __metadata:
     grunt: "npm:^1.6.1"
     grunt-bump: "npm:^0.8.0"
     grunt-cli: "npm:^1.4.3"
-    moment: "npm:^2.30.0"
+    moment: "npm:^2.30.1"
     prettier: "npm:^3.1.1"
     tsx: "npm:^4.7.0"
     typescript: "npm:^5.3.3"
@@ -260,14 +260,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/pieces@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "@sapphire/pieces@npm:4.1.0"
+"@sapphire/pieces@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "@sapphire/pieces@npm:4.2.0"
   dependencies:
     "@discordjs/collection": "npm:^1.5.3"
     "@sapphire/utilities": "npm:^3.14.0"
     tslib: "npm:^2.6.2"
-  checksum: fbca477af861bf215bac422b338d11b983ba5a7d9b63bcea260d82812b3c74c79882e556b31c0b0f0580fd028f3474c7c6ec649e93589787127d6c181b2c08d0
+  checksum: ca2d737198360bfb4293dc51216c206b2c0278d405431cd1810471ab0833a0e4533bd9395ddbeb37a39ea10dd61fbe4e7ae09abc06ebb95988aec21aa5145639
   languageName: node
   linkType: hard
 
@@ -306,7 +306,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/compression@npm:^1":
+"@types/compression@npm:^1.7.5":
   version: 1.7.5
   resolution: "@types/compression@npm:1.7.5"
   dependencies:
@@ -324,7 +324,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/cors@npm:^2":
+"@types/cors@npm:^2.8.17":
   version: 2.8.17
   resolution: "@types/cors@npm:2.8.17"
   dependencies:
@@ -333,7 +333,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/express-fileupload@npm:^1":
+"@types/express-fileupload@npm:^1.4.4":
   version: 1.4.4
   resolution: "@types/express-fileupload@npm:1.4.4"
   dependencies:
@@ -355,7 +355,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/express@npm:*, @types/express@npm:^4":
+"@types/express@npm:*, @types/express@npm:^4.17.21":
   version: 4.17.21
   resolution: "@types/express@npm:4.17.21"
   dependencies:
@@ -2022,10 +2022,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"moment@npm:^2.30.0":
-  version: 2.30.0
-  resolution: "moment@npm:2.30.0"
-  checksum: 3effc8c3dfe8c26045a313b1d9a049ca4a0feaafd4f098240ee90d0802888a3ac30b443a9036975508e6bad2e80308148984b0711263465178810cdfccef8d6f
+"moment@npm:^2.30.1":
+  version: 2.30.1
+  resolution: "moment@npm:2.30.1"
+  checksum: ae42d876d4ec831ef66110bdc302c0657c664991e45cf2afffc4b0f6cd6d251dde11375c982a5c0564ccc0fa593fc564576ddceb8c8845e87c15f58aa6baca69
   languageName: node
   linkType: hard
 
