@@ -23,6 +23,7 @@ ENV Variables:
 -   `EXPRESS_PORT` - Port the SwiftCDN Frontend server will run on (default: 3000)
 -   `COUCHDB_PORT` - The port for your couchdb backend server (default: 5984)
 -   `UPLOAD_LIMIT` - Upload limit, in Megabytes (default: 1000)
+-   `BACKEND_ADDRESS` - The link or ip pointing to where the CouchDB instance is (default: host.docker.internal)
 -   `BACKEND_USERNAME` - Username for CouchDB (default: admin)
 -   `BACKEND_PASSWORD` - Password for CouchDB (default: cdn)
 

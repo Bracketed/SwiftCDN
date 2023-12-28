@@ -16,6 +16,7 @@ services:
             EXPRESS_PORT: 3000
             COUCHDB_PORT: 5984
             UPLOAD_LIMIT: 1000 # In Megabytes
+            BACKEND_ADDRESS: host.docker.internal
             BACKEND_USERNAME: admin
             BACKEND_PASSWORD: cdn
 

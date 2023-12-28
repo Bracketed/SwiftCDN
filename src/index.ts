@@ -115,7 +115,7 @@ container.logger.info('ENV Values checked!');
 container.logger.info();
 container.logger.info('Checking Backend server state...');
 const couchdb_state = await undici
-	.request(`http://host.docker.internal:${process.env.COUCHDB_PORT}`, {
+	.request(`http://${process.env.BACKEND_ADDRESS}:${process.env.COUCHDB_PORT}`, {
 		headers: { Authorization: auth(process.env.BACKEND_USERNAME, process.env.BACKEND_PASSWORD) },
 	})
 	.then((d) => {
@@ -130,7 +130,7 @@ if (!couchdb_state) {
 	process.exit(143);
 }
 container.logger.info('Backend server is OK');
-container.client = new Client(`http://host.docker.internal:${process.env.COUCHDB_PORT}`);
+container.client = new Client(`http://${process.env.BACKEND_ADDRESS}:${process.env.COUCHDB_PORT}`);
 container.logger.info('Updating Backend Server databases...');
 const couchdb_put = await container.client
 	.request({

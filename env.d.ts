@@ -6,6 +6,7 @@ declare global {
 			BACKEND_PASSWORD: string;
 			COUCHDB_PORT: string;
 			UPLOAD_LIMIT: number | undefined;
+			BACKEND_ADDRESS: string;
 		}
 	}
 }
