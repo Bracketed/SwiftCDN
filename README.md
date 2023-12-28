@@ -28,11 +28,11 @@ ENV Variables:
 
 ### Usage
 
-PUT requests to /upload with a file or files attached will upload them and return either a link to the file or an array of links to the files you have uploaded.
-GET requests to / will return the versioning info.
-GET requests to /{file}/download will download the file to your local drive.
-GET requests to /{file}/info will show you the json info of the file.
-GET requests to /{file} will present the file or download it depending on its extension.
+-   PUT requests to /upload with a file or files attached will upload them and return either a link to the file or an array of links to the files you have uploaded.
+-   GET requests to / will return the versioning info.
+-   GET requests to /{file}/download will download the file to your local drive.
+-   GET requests to /{file}/info will show you the json info of the file.
+-   GET requests to /{file} will present the file or download it depending on its extension.
 
 ### Planned Features
 
