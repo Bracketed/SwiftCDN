@@ -44,5 +44,5 @@ jobs:
             - name: Build and push Docker image - Latest
               uses: docker/build-push-action@v5.1.0
               with:
-                  tags: ${{ steps.setName.outputs.lowercase_image_name }}:latest
+                  tags: ghcr.io/${{ steps.setName.outputs.lowercase_image_name }}:latest
                   push: true
