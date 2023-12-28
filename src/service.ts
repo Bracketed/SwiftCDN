@@ -77,6 +77,7 @@ function initialize(Application_Port: string, Upload_Limit: number) {
 							name: file.name,
 							type: file.mimetype,
 							mime: file.mimetype,
+							uploaded: new Date().toISOString(),
 						}),
 					})
 					.then((d) => {
@@ -230,7 +231,7 @@ function initialize(Application_Port: string, Upload_Limit: number) {
 				const video = `<video controls="" autoplay=""> <source src="data:${body.name};base64,${file.toString(
 					'base64'
 				)}" type="${body.mime}"> Your browser does not support the video tag. </video>`;
-				const attachmentDetails = `<meta property="twitter:card" content="summary"><meta property="twitter:title" content="Video File - ${body.name}"><meta property="og:title" content="Video File - ${body.name}"><meta property="twitter:player" content="${request.protocol}://${request.headers.host}/${request.params['file']}"><meta property="og:type" content="video.other"><meta property="og:video" content="${request.protocol}://${request.headers.host}/${request.params['file']}"><meta property="og:description" content="Video File - ${body.name}">`;
+				const attachmentDetails = `<meta property="twitter:card" content="summary"><meta property="twitter:player" content="${request.protocol}://${request.headers.host}/${request.params['file']}"><meta property="og:type" content="video.other"><meta property="og:video" content="${request.protocol}://${request.headers.host}/${request.params['file']}"><meta property="og:description" content="Video File - ${body.name}">`;
 				const css =
 					':root { background-color: black; height: 100%; -moz-user-focus: ignore; } video { position: absolute; inset: 0; margin: auto; max-width: 100%; max-height: 100%; user-select: none; -moz-user-focus: normal; } video:focus { outline-style: none; } ';
 
@@ -251,7 +252,7 @@ function initialize(Application_Port: string, Upload_Limit: number) {
 				const img = `<img src="data:${body.mime};base64,${file.toString('base64')}" alt="${
 					body.name
 				}" class="transparent">`;
-				const attachmentDetails = `<meta property="twitter:card" content="summary_large_image"><meta property="twitter:title" content="Image File - ${body.name}"><meta property="og:title" content="Image File - ${body.name}"><meta property="twitter:image" content="${request.protocol}://${request.headers.host}/${request.params['file']}"><meta property="og:image" content="${request.protocol}://${request.headers.host}/${request.params['file']}"><meta property="og:description" content="Image File - ${body.name}">`;
+				const attachmentDetails = `<meta property="twitter:card" content="summary_large_image"><meta property="twitter:image" content="${request.protocol}://${request.headers.host}/${request.params['file']}"><meta property="og:image" content="${request.protocol}://${request.headers.host}/${request.params['file']}"><meta property="og:description" content="Image File - ${body.name}">`;
 				const css =
 					'body { margin: 0; } @media not print { .fullZoomOut { cursor: zoom-out; } .fullZoomIn { cursor: zoom-in; } .shrinkToFit { cursor: zoom-in; } .overflowingVertical, .overflowingHorizontalOnly { cursor: zoom-out; } } .isInObjectOrEmbed { width: 100%; height: 100vh; } img { display: block; } ';
 				const html = `<html><head><meta name="robots" content="noindex">${attachmentDetails}<meta name="viewport" content="width=device-width; height=device-height;"><style>${css}</style><title>${body.name}</title></head><body>${img}</body></html>`;
