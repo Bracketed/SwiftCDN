@@ -16,11 +16,11 @@ services:
             EXPRESS_PORT: 3000
             COUCHDB_PORT: 5984
             UPLOAD_LIMIT: 1000 # In Megabytes
-            BACKEND_USERNAME: administator
+            BACKEND_USERNAME: admin
             BACKEND_PASSWORD: cdn
 
     backend:
-        image: bitnami/couchdb:3.3.3
+        image: bracketed/couchdb:latest
         container_name: cdn-backend
         restart: always
         networks:
@@ -29,10 +29,9 @@ services:
             - 5984:5984
         volumes:
             - cdn-storage:/bitnami/couchdb
-            - ./couchdb.config.ini:/opt/bitnami/couchdb/etc/local.d/10-custom.ini
         environment:
             COUCHDB_PORT_NUMBER: 5984
-            COUCHDB_USER: administator
+            COUCHDB_USER: admin
             COUCHDB_PASSWORD: cdn
 
 networks:
