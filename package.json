@@ -22,7 +22,7 @@
 		"setversion": "node -p \"'export default ' + JSON.stringify(require('./package.json').version) + ';'\" > src/utilities/version.ts",
 		"test": "yarn setversion && yarn tsx watch ./src/index.ts",
 		"compile": "yarn tsc",
-		"build": "docker build --tag bracketed/swiftcdn:latest .",
+		"build": "docker build --tag bracketed/swiftcdn:development .",
 		"stack:up": "docker compose -f compose.yml up -d",
 		"stack:down": "docker compose -f compose.yml down",
 		"push:dev": "yarn grunt bump:prerelease",
